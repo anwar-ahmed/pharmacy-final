@@ -1,0 +1,69 @@
+<div class="container">
+	<h3 style="text-align:center">Add Medicine</h3>
+	<form #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
+		<div class="form-group">
+			<label for="name">Medicine Name</label>
+			<input type="text" class="form-control form-control-lg" id="name" name="name" [(ngModel)]="name" required minlength="3" #nameRef="ngModel">
+			<div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)" class="alert alert-danger">
+				<div *ngIf="nameRef.errors.required">
+					Name is required.
+				</div>
+				<div *ngIf="nameRef.errors.minlength">
+					Name must be at least 3 characters long.
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="manufacturer">Manufacturer</label>
+			<input type="text" class="form-control form-control-lg" id="manufacturer" name="manufacturer" [(ngModel)]="manufacturer" required minlength="3"
+			 #mfRef="ngModel">
+			<div *ngIf="mfRef.invalid && (mfRef.dirty || mfRef.touched)" class="alert alert-danger">
+				<div *ngIf="mfRef.errors.required">
+					Manufacturer is required.
+				</div>
+				<div *ngIf="mfRef.errors.minlength">
+					Name must be at least 3 characters long.
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="batchno">Batch No.</label>
+			<input type="text" class="form-control form-control-lg" id="batchno" name="batchno" [(ngModel)]="batchno" required minlength="2" #bnRef="ngModel">
+			<div *ngIf="bnRef.invalid && (bnRef.dirty || bnRef.touched)" class="alert alert-danger">
+				<div *ngIf="bnRef.errors.required">
+					Batch No. is required.
+				</div>
+				<div *ngIf="bnRef.errors.minlength">
+					Batch No. must be at least 2 characters long.
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="expiry">Expiry Date</label>
+			<input type="date" class="form-control form-control-lg" id="expiry" name="expiry" [(ngModel)]="expiry" required #dtRef="ngModel">
+			<div *ngIf="dtRef.invalid && (dtRef.dirty || dtRef.touched)" class="alert alert-danger">
+				<div *ngIf="dtRef.errors.required">
+					Expiry Date is required.
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="price">Price</label>
+			<input type="number" class="form-control form-control-lg" id="price" name="price" [(ngModel)]="price" required #priceRef="ngModel">
+			<div *ngIf="priceRef.invalid && (priceRef.dirty || priceRef.touched)" class="alert alert-danger">
+				<div *ngIf="priceRef.errors.required">
+					Price is required.
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="type">Type</label>
+			<select class="form-control form-control-lg" name="type" [ngModel]="types[0]">
+        <option *ngFor="let type of types" [value]="type">
+          {{type}}
+        </option>
+      </select>
+		</div>
+		<button type="submit" class="btn btn-lg btn-outline-primary active" [disabled]="formRef.invalid">Submit</button>
+	</form>
+</div>

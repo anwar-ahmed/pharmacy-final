@@ -1,0 +1,54 @@
+<div class='container'>
+<div class='card text-center '>
+	<div class='card-header bg-primary'>
+		Medicine List
+	</div>
+	<div class='card-body'>
+		<div class='row'>
+			<div class='col-md-2'><input type='text'  placeholder="Filter Text" [(ngModel)]='nameFilter' /></div>
+			<div class='col-md-8'>
+				<h5>Selected Columns</h5>
+				 Name: <input type="checkbox" id="name" onclick="columnFunction('name')" checked>
+				 Manufacturer: <input type="checkbox" id="manufacturer" onclick="columnFunction('manufacturer')" checked>
+				 Batch No: <input type="checkbox" id="batchno" onclick="columnFunction('batchno')" checked >
+				 Expiration Date: <input type="checkbox" id="expiry" onclick="columnFunction('expiry')" checked>
+				 Price: <input type="checkbox" id="price" onclick="columnFunction('price')" checked>
+				 Type: <input type="checkbox" id="type" onclick="columnFunction('type')" checked>
+			</div>
+		</div>
+		<br>
+		<table class='table table-striped table-condensed table-bordered' *ngIf='medicines && medicines.length'>
+			<thead>
+				<tr>
+					<th id="th-name" style="min-width: 80px;">Name</th>
+					<th id="th-manufacturer" style="min-width: 80px;">Manufacturer</th>
+					<th id="th-batchno" style="min-width: 80px;">Batch No</th>
+					<th id="th-expiry" style="min-width: 80px;">Expiration Data</th>
+					<th id="th-price" style="min-width: 100px;">Price</th>
+					<th id="th-type" style="min-width: 60px;">Type</th>
+					<th  style="width:20px;"> </th>
+					<th  style="width:20px;"> </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor='let medicine of medicines | medicineFilter: nameFilter'>
+					<td class="td-name" ><a [routerLink]="medicine.id">{{ medicine.name | uppercase }}</a>
+					</td>
+					<td class="td-manufacturer" >{{ medicine.manufacturer }}</td>
+					<td class="td-batchno" >{{ medicine.batchno }}</td>
+					<td class="td-expiry" >{{ medicine.expiry }}</td>
+					<td class="td-price" >{{ medicine.price }}</td>
+					<td class="td-type" >{{ medicine.type }}</td>
+					<td>
+						<button  type="button" [routerLink]="['/editMedicine',medicine.id]" class="btn btn-sm btn-outline-primary active">Edit</button>
+					</td>
+					<td>
+						<button type="button" (click)="deleteMedicine(medicine.id)" class="btn btn-sm btn-outline-danger active">Delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<button type="button" routerLink="/addMedicine" class="btn btn-sm btn-outline-primary active">Add Medicine</button>
+	</div>
+</div>
+</div>
